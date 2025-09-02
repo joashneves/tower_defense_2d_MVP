@@ -1,12 +1,25 @@
 function enemy_create(){
+	life_max = 30;
+	life = life_max;
 	velocity_horizontal = 0;
 	velocity_vertical = 0;
 	velocity = 1;
 	gravity_var = 0.3;
 	velocity_jump = 9;
 }
-// controla o player
-function enemy_controller(_target = IDPLAYER){
+// Quando o inimigo toma dano
+function enemy_take_damage(){
+	var _projectile = place_meeting(x, y, IDPROJECTILE)
+	if(_projectile){
+		life -= IDPROJECTILE.damage;
+		instance_destroy(IDPROJECTILE);
+	}
+	
+}
+// Ataque do inigo
+
+// como o inimigo pensa
+function enemy_controller(_target = IDGOAL){
 	var _is_on_ground = place_meeting(x, y + 1, IDBLOCK);
 	var _jump, _direction;
 	_jump = false;
@@ -29,11 +42,17 @@ function enemy_controller(_target = IDPLAYER){
 		enemy_applies_gravity(); // Aplica grvidade
 	}
 }
+// Quando a vida chega a 0
+function enemy_death(){
+	if (life <= 0){
+		instance_destroy();	
+	}
+}
 // aplica gravidade
 function enemy_applies_gravity(){
 	velocity_vertical += gravity_var;
 }
-// Movimentação do player, aplica variaveis
+// Movimentação do inimigo, aplica variaveis
 function enemy_movement(){
 	player_collision_horizontal();
 	player_collision_vertical();

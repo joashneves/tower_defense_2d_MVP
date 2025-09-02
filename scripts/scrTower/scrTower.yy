@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrTower",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrTower",
+  "parent":{
+    "name":"Towers",
+    "path":"folders/Objects/Towers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

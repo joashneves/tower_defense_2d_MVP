@@ -1,0 +1,1 @@
+tower_draw_ranger()

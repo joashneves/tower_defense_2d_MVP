@@ -6,6 +6,11 @@ function enemy_create(){
 	velocity = 1;
 	gravity_var = 0.3;
 	velocity_jump = 9;
+	// Atack
+	enemy_is_atacking = false;
+	enemy_ranged = 160;
+	enemy_atack_cooldown = 60;
+	enemy_atack_timer = 0;
 }
 // Quando o inimigo toma dano
 function enemy_take_damage(){
@@ -16,7 +21,35 @@ function enemy_take_damage(){
 	}
 	
 }
-// Ataque do inigo
+function enemy_atack() {
+	if(enemy_atack_timer > 0){
+		enemy_atack_timer--;
+		return;
+	}
+    var _goal_atack = [IDGOAL, IDTOWER, IDPLAYER];
+    for (var i = 0; i < array_length(_goal_atack); i++) {
+        var target = _goal_atack[i];
+        if (target != noone) {
+            // Distância entre inimigo e alvo
+            var dist = point_distance(x, y, target.x, target.y);
+            if (dist < 8) { // raio de ataque
+				velocity_horizontal = 0;
+				velocity_vertical = 0;
+				enemy_is_atacking = true;
+                var _atack_object = instance_create_depth(
+                    x - (image_xscale * 8),
+                    y,
+                    0,
+                    oAtackCommon
+                );
+                enemy_atack_timer = enemy_atack_cooldown;
+                break; // já achou um alvo, não precisa continuar
+            }else{
+				enemy_is_atacking = false;	
+			}
+        }
+    }
+}
 
 // como o inimigo pensa
 function enemy_controller(_target = IDGOAL){
@@ -32,7 +65,9 @@ function enemy_controller(_target = IDGOAL){
         }
 		show_debug_message("INFO ENEMY : existe target : " + string(_direction));
 	}
+	if(!enemy_is_atacking){
 	velocity_horizontal = (_direction) * velocity;
+	}
 	// Pulando
 	if(_is_on_ground){
 		if(_jump){

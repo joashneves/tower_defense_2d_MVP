@@ -39,10 +39,12 @@
   "resources":[
     {"id":{"name":"IDBLOCK","path":"objects/IDBLOCK/IDBLOCK.yy",},},
     {"id":{"name":"IDENEMY","path":"objects/IDENEMY/IDENEMY.yy",},},
+    {"id":{"name":"IDENEMYATACK","path":"objects/IDENEMYATACK/IDENEMYATACK.yy",},},
     {"id":{"name":"IDGOAL","path":"objects/IDGOAL/IDGOAL.yy",},},
     {"id":{"name":"IDPLAYER","path":"objects/IDPLAYER/IDPLAYER.yy",},},
     {"id":{"name":"IDPROJECTILE","path":"objects/IDPROJECTILE/IDPROJECTILE.yy",},},
     {"id":{"name":"IDTOWER","path":"objects/IDTOWER/IDTOWER.yy",},},
+    {"id":{"name":"oAtackCommon","path":"objects/oAtackCommon/oAtackCommon.yy",},},
     {"id":{"name":"oBlock","path":"objects/oBlock/oBlock.yy",},},
     {"id":{"name":"oEnemyCommon","path":"objects/oEnemyCommon/oEnemyCommon.yy",},},
     {"id":{"name":"oGoalFrist","path":"objects/oGoalFrist/oGoalFrist.yy",},},

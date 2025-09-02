@@ -1,40 +1,47 @@
-function player_create(){
+function enemy_create(){
 	velocity_horizontal = 0;
 	velocity_vertical = 0;
-	velocity = 2;
+	velocity = 1;
 	gravity_var = 0.3;
-	velocity_jump = 8;
+	velocity_jump = 9;
 }
 // controla o player
-function player_controller(){
-	var _is_jump_true = place_meeting(x, y + 1, IDBLOCK);
-	var _left, _rigth, _jump;
-	_left = keyboard_check(ord("A"));
-	_rigth = keyboard_check(ord("D"));
-	_jump = keyboard_check_pressed(ord("W"));
-	velocity_horizontal = (_rigth - _left) * velocity;
+function enemy_controller(_target = IDPLAYER){
+	var _is_on_ground = place_meeting(x, y + 1, IDBLOCK);
+	var _jump, _direction;
+	_jump = false;
+	_direction = 0
+	if(instance_exists(_target)){
+		_direction = (x > _target.x) ? -1 : 1;
+       // Se tiver no chão e bloco na frente → pula
+        if (_is_on_ground && place_meeting(x + (_direction * 4), y, IDBLOCK)){
+            _jump = true;
+        }
+		show_debug_message("INFO ENEMY : existe target : " + string(_direction));
+	}
+	velocity_horizontal = (_direction) * velocity;
 	// Pulando
-	if(_is_jump_true){
+	if(_is_on_ground){
 		if(_jump){
 			velocity_vertical = -velocity_jump; 
 		}
 	}else{
-		player_applies_gravity(); // Aplica grvidade
+		enemy_applies_gravity(); // Aplica grvidade
 	}
 }
 // aplica gravidade
-function player_applies_gravity(){
+function enemy_applies_gravity(){
 	velocity_vertical += gravity_var;
 }
 // Movimentação do player, aplica variaveis
-function player_movement(){
+function enemy_movement(){
 	player_collision_horizontal();
 	player_collision_vertical();
 	x += velocity_horizontal;
 	y += velocity_vertical;
 }
 // Verifica colisão horizontal
-function player_collision_horizontal(){
+function enemy_collision_horizontal(){
 	var _collision = instance_place(x + velocity_horizontal, y, IDBLOCK);
 	if(_collision){
 		if(velocity_horizontal > 0){
@@ -47,7 +54,7 @@ function player_collision_horizontal(){
 	}	
 }
 // verifica colisão vertical
-function player_collision_vertical(){
+function enemy_collision_vertical(){
 	var _collision = instance_place(x, y + velocity_vertical, IDBLOCK);
 	if(_collision){
 		if(velocity_vertical > 0){

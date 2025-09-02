@@ -2,7 +2,7 @@ function tower_create(){
 	life_max = 100;
 	life = life_max;
 	tower_ranged = 160;
-	tower_atack_cooldown = 30;
+	tower_atack_cooldown = 120;
 	tower_atack_timer = 0;
 }
 function tower_atack(_projectile = oProjectileFrist){
@@ -16,10 +16,10 @@ function tower_atack(_projectile = oProjectileFrist){
 	    if (enemy <= tower_ranged) {
 			// Pega a altura do sprite da torre já escalado
 			var spr_height = sprite_get_height(sprite_index) * image_yscale;
-			var _enemy_direction = point_direction(x,y - spr_height * 0.5, IDENEMY.x, IDENEMY.y);
+			var _enemy_direction = point_direction(x,y - spr_height, IDENEMY.x, IDENEMY.y);
 			// Cria o projétil no topo do objeto (meio do topo)
 	        // Cria projétil
-	        var proj = instance_create_layer(x, y - spr_height * 0.5, "Instances", _projectile);
+	        var proj = instance_create_layer(x, y - spr_height, "Instances", _projectile);
 	        proj.direction = _enemy_direction;
 			proj.image_angle = _enemy_direction;
             

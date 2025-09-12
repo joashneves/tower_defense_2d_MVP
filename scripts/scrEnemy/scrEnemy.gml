@@ -31,13 +31,16 @@ function enemy_atack() {
         var target = _goal_atack[i];
         if (target != noone) {
             // Distância entre inimigo e alvo
-            var dist = point_distance(x, y, target.x, target.y);
-            if (dist < 8) { // raio de ataque
+          
+			var _direction_atack = (image_xscale == -1)  ?  -32 :  32; 
+			  var _check_collision = place_meeting(x+_direction_atack, y, target);
+			show_debug_message("INFO ENEMY : existe target : " + string(_direction_atack) + "dist :  " + string(dist));
+            if (_check_collision) { // raio de ataque
 				velocity_horizontal = 0;
 				velocity_vertical = 0;
 				enemy_is_atacking = true;
                 var _atack_object = instance_create_depth(
-                    x - (image_xscale * 8),
+                    x + (_direction_atack),
                     y,
                     0,
                     oAtackCommon
@@ -56,16 +59,17 @@ function enemy_controller(_target = IDGOAL){
 	var _is_on_ground = place_meeting(x, y + 1, IDBLOCK);
 	var _jump, _direction;
 	_jump = false;
-	_direction = 0
+	_direction = 0;
 	if(instance_exists(_target)){
 		_direction = (x > _target.x) ? -1 : 1;
        // Se tiver no chão e bloco na frente → pula
         if (_is_on_ground && place_meeting(x + (_direction * 4), y, IDBLOCK)){
             _jump = true;
         }
-		show_debug_message("INFO ENEMY : existe target : " + string(_direction));
+		
 	}
 	if(!enemy_is_atacking){
+		image_xscale = _direction;
 	velocity_horizontal = (_direction) * velocity;
 	}
 	// Pulando

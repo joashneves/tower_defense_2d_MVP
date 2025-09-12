@@ -54,6 +54,7 @@
     {"id":{"name":"oTowerFrist","path":"objects/oTowerFrist/oTowerFrist.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"scrEnemy","path":"scripts/scrEnemy/scrEnemy.yy",},},
+    {"id":{"name":"scrEnemyAtack","path":"scripts/scrEnemyAtack/scrEnemyAtack.yy",},},
     {"id":{"name":"scrPlayer","path":"scripts/scrPlayer/scrPlayer.yy",},},
     {"id":{"name":"scrProjectile","path":"scripts/scrProjectile/scrProjectile.yy",},},
     {"id":{"name":"scrTower","path":"scripts/scrTower/scrTower.yy",},},

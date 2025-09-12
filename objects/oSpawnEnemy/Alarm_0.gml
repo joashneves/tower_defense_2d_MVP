@@ -30,9 +30,6 @@ if (blk != noone) {
     // Cria o inimigo logo acima do bloco
     var enemy = instance_create_layer(blk.x, blk.bbox_top - 32/2, "Instances", oEnemyCommon);
 	 show_debug_message("Objeto criado!");
-} else {
-    // Se não achou bloco, pode tentar de novo ou ignorar
-    show_debug_message("Nenhum bloco encontrado nessa posição.");
 }
 
 alarm[0] = 12;

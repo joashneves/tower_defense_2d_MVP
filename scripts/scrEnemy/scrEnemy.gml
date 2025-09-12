@@ -32,9 +32,9 @@ function enemy_atack() {
         if (target != noone) {
             // Distância entre inimigo e alvo
           
-			var _direction_atack = (image_xscale == -1)  ?  -32 :  32; 
-			  var _check_collision = place_meeting(x+_direction_atack, y, target);
-			show_debug_message("INFO ENEMY : existe target : " + string(_direction_atack) + "dist :  " + string(dist));
+			var _direction_atack = (image_xscale == -1)  ?  -8 :  8; 
+			  var _check_collision = place_meeting(x+(_direction_atack/2), y, target);
+			//show_debug_message("INFO ENEMY : existe target : " + string(_direction_atack) + "dist :  " + string(dist));
             if (_check_collision) { // raio de ataque
 				velocity_horizontal = 0;
 				velocity_vertical = 0;
@@ -53,7 +53,6 @@ function enemy_atack() {
         }
     }
 }
-
 // como o inimigo pensa
 function enemy_controller(_target = IDGOAL){
 	var _is_on_ground = place_meeting(x, y + 1, IDBLOCK);
